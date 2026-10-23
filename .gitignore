@@ -6,3 +6,7 @@ __pycache__/
 
 # Environment variables
 .env
+
+# Airflow runtime
+logs/
+config/airflow.cfg
