@@ -11,7 +11,7 @@ with DAG(
 ) as dag:
 
     '''서울시 공공자전거 대여소 정보'''
-    tb_cycle_station_info = HttpOperator(
+    tb_cycle_station_info = HttpOperator( #Xcom에 저장됨
         task_id='tb_cycle_station_info',
         http_conn_id='openapi.seoul.go.kr',
         endpoint='{{var.value.apikey_openapi_seoul_go_kr}}/json/tbCycleStationInfo/1/10/',
@@ -25,7 +25,7 @@ with DAG(
     @task(task_id='python_2')
     def python_2(**kwargs):
         ti = kwargs['ti']
-        rslt = ti.xcom_pull(task_ids='tb_cycle_station_info')
+        rslt = ti.xcom_pull(task_ids='tb_cycle_station_info')    # 따라서 Xcom으로부터 pull해야 함
         import json
         from pprint import pprint
 
