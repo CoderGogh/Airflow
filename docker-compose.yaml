@@ -386,6 +386,18 @@ services:
     networks:
       - network_custom
 
+  rshiny_custom:
+    image: rocker/shiny:4.3.1
+    restart: always
+    ports:
+      - "3838:3838"
+    volumes:
+      - ./shiny/apps:/srv/shiny-server     # Shiny 앱 폴더 (app.R 등)
+      - ./shiny/logs:/var/log/shiny-server # Shiny 로그
+    networks:
+      network_custom:
+        ipv4_address: 172.28.0.12
+
 volumes:
   postgres-db-volume:
   postgres-custom-db-volume:
