@@ -1,7 +1,6 @@
 import pendulum
 from datetime import timedelta
-from airflow.utils.state import State
-from airflow.sdk import DAG
+from airflow.sdk import DAG, TaskInstanceState
 from airflow.providers.standard.sensors.external_task import ExternalTaskSensor
 
 with DAG(
@@ -14,7 +13,7 @@ with DAG(
         task_id='external_task_sensor_a',
         external_dag_id='dags_branch_python_operator',
         external_task_id='task_a',
-        allowed_states=[State.SKIPPED],
+        allowed_states=[TaskInstanceState.SKIPPED],
         execution_delta=timedelta(hours=6),
         poke_interval=10        #10초
     )
@@ -23,7 +22,7 @@ with DAG(
         task_id='external_task_sensor_b',
         external_dag_id='dags_branch_python_operator',
         external_task_id='task_b',
-        failed_states=[State.SKIPPED],
+        failed_states=[TaskInstanceState.SKIPPED],
         execution_delta=timedelta(hours=6),
         poke_interval=10        #10초
     )
@@ -32,7 +31,7 @@ with DAG(
         task_id='external_task_sensor_c',
         external_dag_id='dags_branch_python_operator',
         external_task_id='task_c',
-        allowed_states=[State.SUCCESS],
+        allowed_states=[TaskInstanceState.SUCCESS],
         execution_delta=timedelta(hours=6),
         poke_interval=10        #10초
     )
