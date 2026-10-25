@@ -388,6 +388,7 @@ services:
 
   rshiny_custom:
     image: rocker/shiny:4.3.1
+    platform: linux/amd64 # rocker/shiny는 amd64 이미지만 제공 (Apple Silicon에선 에뮬레이션)
     restart: always
     ports:
       - "3838:3838"
