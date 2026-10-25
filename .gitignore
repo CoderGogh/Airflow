@@ -13,3 +13,6 @@ config/airflow.cfg
 
 # Data files written by DAGs
 files/
+
+# macOS
+.DS_Store
