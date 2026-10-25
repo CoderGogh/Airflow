@@ -13,7 +13,7 @@ with DAG(
     class CustomBranchOperator(BaseBranchOperator):
         def choose_branch(self, context):
             import random
-            print(context)
+            print(context) # check
             
             item_lst = ['A', 'B', 'C']
             selected_item = random.choice(item_lst)
