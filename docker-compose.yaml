@@ -387,14 +387,15 @@ services:
       - network_custom
 
   rshiny_custom:
-    image: rocker/shiny:4.3.1
-    platform: linux/amd64 # rocker/shiny는 amd64 이미지만 제공 (Apple Silicon에선 에뮬레이션)
+    build: ./custom_image/rshiny
+    platform: linux/amd64 # rocker 이미지는 amd64만 제공 (Apple Silicon에선 에뮬레이션)
     restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_CUSTOM_USER:?set in .env}
+      POSTGRES_PASSWORD: ${POSTGRES_CUSTOM_PASSWORD:?set in .env}
+      POSTGRES_DB: ${POSTGRES_CUSTOM_DB:?set in .env}
     ports:
       - "3838:3838"
-    volumes:
-      - ./shiny/apps:/srv/shiny-server     # Shiny 앱 폴더 (app.R 등)
-      - ./shiny/logs:/var/log/shiny-server # Shiny 로그
     networks:
       network_custom:
         ipv4_address: 172.28.0.12
