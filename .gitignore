@@ -10,3 +10,6 @@ __pycache__/
 # Airflow runtime
 logs/
 config/airflow.cfg
+
+# Data files written by DAGs
+files/
