@@ -13,7 +13,7 @@ with DAG(
     send_email_task = EmailOperator(
         task_id='send_email_task',
         conn_id='conn_smtp_gmail',      # Airflow 3.0 실습부터 추가
-        to=os.environ['REDIRECT_EMAIL'],    # 수신자 (.env)
+        to=os.environ['REDIRECT_EMAIL'],
         subject='Airflow 성공메일',
         html_content='Airflow 작업이 완료되었습니다'
     )
