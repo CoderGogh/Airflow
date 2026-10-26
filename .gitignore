@@ -11,8 +11,9 @@ __pycache__/
 logs/
 config/airflow.cfg
 
-# Data files written by DAGs
-files/
+# Data files written by DAGs (SQL used by DAGs is tracked)
+files/*
+!files/sqls/
 
 # macOS
 .DS_Store
